@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import { ShoppingCartIcon } from '@heroicons/react/outline';
 
 const CartButton = props => {
+  const totalQuantity = useSelector(state => state.cart.totalQuantity);
+
   return (
     <button
       onClick={props.onClick}
@@ -8,8 +12,8 @@ const CartButton = props => {
     >
       <ShoppingCartIcon className="h-6 w-6 m-2" />
       Cart
-      <div className="bg-[#747474] rounded-[50%] h-8 w-8 flex items-center justify-center m-2 text-green-500">
-        <p>0</p>
+      <div className="bg-green-500 rounded-[50%] h-8 w-8 flex items-center justify-center m-2 text-white">
+        <p>{totalQuantity}</p>
       </div>
     </button>
   );

@@ -21,7 +21,7 @@ const Header = props => {
   };
 
   return (
-    <div className="w-full h-24 flex justify-center shadow-md bg-neutral-700">
+    <div className="w-full h-24 flex justify-center shadow-md bg-zinc-800">
       <div className="h-full w-[1360px] flex items-center justify-between p-2">
         <div className="flex">
           <h1 className="text-[#fff] text-3xl">Pseudo Shop</h1>

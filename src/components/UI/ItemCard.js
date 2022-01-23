@@ -1,13 +1,29 @@
+import { useDispatch } from 'react-redux';
+
+import { cartActions } from '../../store/cart-slice';
 import { ShoppingCartIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Button from './Button';
 
 const ItemCard = ({ data }) => {
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItemToCart({
+        title: data.title,
+        image: data.image,
+        price: data.price,
+        id: data.id,
+      })
+    );
+  };
+
   return (
     <div className="bg-[rgba(34,34,34,0.80)] text-white w-64 rounded-xl overflow-hidden my-4 mx-2 flex flex-col justify-between shadow-lg">
       <div>
         <div className="flex justify-center items-center p-5 h-48">
-          <img src={data.image} className="max-w-full max-h-full" />
+          <img src={data.image} alt="" className="max-w-full max-h-full" />
         </div>
         <p className="text-xl p-2">{data.title}</p>
       </div>
@@ -22,14 +38,10 @@ const ItemCard = ({ data }) => {
           <p className="text-2xl">${data.price}</p>
         </div>
         <div className="flex items-center justify-center p-2 text-black">
-          <Button>
+          <Button onClick={addToCartHandler}>
             <ShoppingCartIcon className="h-8 p-1" />
             Add To Cart
           </Button>
-          {/* <button className="flex items-center text-xl rounded-xl bg-[#8a8a8a] p-2 hover:brightness-125">
-            <ShoppingCartIcon className="h-8 p-1" />
-            Add To Cart
-          </button> */}
         </div>
       </div>
     </div>

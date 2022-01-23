@@ -1,6 +1,9 @@
 const Button = props => {
   return (
-    <button className="flex items-center text-xl rounded-xl bg-[#8a8a8a] p-2 hover:brightness-125">
+    <button
+      onClick={props.onClick}
+      className="flex items-center text-xl rounded-xl bg-[#8a8a8a] p-2 hover:brightness-125"
+    >
       {props.children}
     </button>
   );
