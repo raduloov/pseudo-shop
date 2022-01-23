@@ -1,6 +1,7 @@
 import { SearchIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 
+import Logo from './UI/Logo';
 import CartButton from './Cart/CartButton';
 import Button from './UI/Button';
 
@@ -24,21 +25,27 @@ const Header = props => {
     <div className="w-full h-24 flex justify-center shadow-md bg-zinc-800">
       <div className="h-full w-[1360px] flex items-center justify-between p-2">
         <div className="flex">
-          <h1 className="text-[#fff] text-3xl">Pseudo Shop</h1>
-          <form onSubmit={submitHandler} className="flex">
+          <div className="flex">
+            <div>
+              <h1 className="text-[#fff] text-3xl">Pseudo Shop</h1>
+              <h4 className="text-zinc-400">Free shipping worldwide</h4>
+            </div>
+            <Logo />
+          </div>
+          <form onSubmit={submitHandler} className="flex items-center ml-20">
             <input
               onChange={searchHandler}
               type="text"
               value={searchTerm}
-              placeholder="Search in category..."
-              className="rounded-md px-1 bg-[rgba(255,255,255,0.8)] text-black text-xl hover:bg-[rgba(255,255,255,1)] w-42 ml-20 mr-2"
+              placeholder="Search for a product..."
+              className="rounded-md px-1 py-2 bg-[rgba(255,255,255,0.8)] text-black text-xl hover:bg-[rgba(255,255,255,1)] w-42 mr-2"
             />
             <Button>
-              <SearchIcon className="h-8" />
+              <SearchIcon className="h-7" />
             </Button>
           </form>
         </div>
-        <CartButton onClick={props.onClick} />
+        <CartButton onClick={props.onShowCart} />
       </div>
     </div>
   );

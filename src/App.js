@@ -5,7 +5,8 @@ import Header from './components/Header';
 import MainContainer from './components/MainContainer';
 import ItemsContainer from './components/ItemsContainer';
 import { Spinner } from './components/UI/Spinner';
-import CartContainer from './components/Cart/CartContainer';
+import Cart from './components/Cart/Cart';
+import Modal from './components/UI/Modal';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -13,6 +14,7 @@ function App() {
   const [error, setError] = useState(null);
 
   const showCart = useSelector(state => state.ui.cartIsVisible);
+  const showOrderScreen = useSelector(state => state.ui.orderScreenIsVisible);
   const dispatch = useDispatch();
 
   const getAllProducts = async (url = 'https://fakestoreapi.com/products') => {
@@ -33,10 +35,10 @@ function App() {
     }
   };
 
-  const setData = useCallback(async () => {
+  const setData = useCallback(async url => {
     setIsLoading(true);
 
-    const data = await getAllProducts();
+    const data = await getAllProducts(url);
 
     const loadedItems = [];
 
@@ -86,7 +88,15 @@ function App() {
   };
 
   const toggleCartHandler = () => {
-    dispatch(uiActions.toggle());
+    dispatch(uiActions.toggleCart());
+  };
+
+  const orderScreenHandler = () => {
+    dispatch(uiActions.toggleOrderScreen());
+
+    if (showOrderScreen) {
+      dispatch(uiActions.toggleCart());
+    }
   };
 
   let content = (
@@ -122,8 +132,9 @@ function App() {
 
   return (
     <div>
-      {showCart && <CartContainer onClose={toggleCartHandler} />}
-      <Header onSearch={searchHandler} onClick={toggleCartHandler} />
+      {showOrderScreen && <Modal onClose={orderScreenHandler} />}
+      {showCart && <Cart onClose={toggleCartHandler} onOrder={orderScreenHandler} />}
+      <Header onSearch={searchHandler} onShowCart={toggleCartHandler} />
       <MainContainer onChooseCategory={chooseCategoryHandler}>
         {content}
       </MainContainer>

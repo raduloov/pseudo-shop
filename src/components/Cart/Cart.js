@@ -9,6 +9,30 @@ const CartContainer = props => {
     useSelector(state => state.cart.totalAmount).toFixed(2)
   );
 
+  const orderHandler = async () => {
+    const orderItems = cartItems.map(item => {
+      return {
+        name: item.title,
+        price: item.price,
+        quantity: item.quantity,
+        totalPrice: item.totalPrice,
+      };
+    });
+
+    const response = await fetch(
+      'https://pseudo-shop-firebase-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(orderItems),
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+
+    props.onOrder();
+  };
+
   return (
     <>
       <div
@@ -24,10 +48,8 @@ const CartContainer = props => {
         className="w-96 h-screen fixed right-0 z-20 animate-[slide-left_0.5s_ease] flex flex-col justify-between"
       >
         <div className="w-full h-32 bg-neutral-500 text-white text-3xl flex justify-center items-center shadow-md">
-          <div className="flex items-center">
-            Your Cart
-            <ShoppingCartIcon className="h-10 m-3" />
-          </div>
+          Your Cart
+          <ShoppingCartIcon className="h-10 m-3" />
         </div>
         <div className="flex flex-col overflow-y-auto h-full p-3">
           {cartItems.map(item => (
@@ -49,11 +71,14 @@ const CartContainer = props => {
           <div className="flex justify-evenly w-full">
             <button
               onClick={props.onClose}
-              className="border-white border-2 rounded-lg p-2 text-2xl text-white w-24 hover:bg-zinc-400 shadow-md"
+              className="border-white border-2 rounded-lg p-2 text-2xl text-white w-24 hover:bg-zinc-400 shadow-md active:scale-[0.95] "
             >
               Cancel
             </button>
-            <button className="bg-white rounded-lg p-2 text-2xl text-black w-24 hover:bg-zinc-400 shadow-md">
+            <button
+              onClick={orderHandler}
+              className="bg-white rounded-lg p-2 text-2xl text-black w-24 hover:bg-zinc-400 shadow-md active:scale-[0.95]"
+            >
               Order
             </button>
           </div>

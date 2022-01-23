@@ -35,13 +35,13 @@ const CartItem = props => {
           <div className="px-3 flex">
             <button
               onClick={removeItemHandler}
-              className="border-white border-2 rounded-[50%] w-7 h-7 text-xl text-white hover:bg-zinc-400 shadow-md mx-2"
+              className="border-white border-2 rounded-[50%] w-7 h-7 text-xl text-white hover:bg-zinc-400 shadow-md mx-2 active:scale-[0.95]"
             >
               <MinusIcon />
             </button>
             <button
               onClick={addItemHandler}
-              className="bg-white rounded-[50%] text-2xl text-black w-7 h-7 hover:bg-zinc-400 shadow-md mx-2"
+              className="bg-white rounded-[50%] text-2xl text-black w-7 h-7 hover:bg-zinc-400 shadow-md mx-2 active:scale-[0.95]"
             >
               <PlusIcon />
             </button>
