@@ -8,6 +8,12 @@ const cartSlice = createSlice({
     totalAmount: 0,
   },
   reducers: {
+    fillCartFromLocalStorage(state, action) {
+      const items = action.payload;
+      items.forEach(item => {
+        state.items.push(JSON.parse(localStorage.getItem(item)));
+      });
+    },
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find(item => item.id === newItem.id);
@@ -15,18 +21,23 @@ const cartSlice = createSlice({
       state.totalAmount += newItem.price;
 
       if (!existingItem) {
-        state.items.push({
+        const item = {
           title: newItem.title,
           image: newItem.image,
           quantity: 1,
           price: newItem.price,
           totalPrice: newItem.price,
           id: newItem.id,
-        });
+        };
+        state.items.push(item);
+
+        localStorage.setItem(item.id, JSON.stringify(item));
       } else {
         existingItem.quantity++;
         existingItem.totalPrice += newItem.price;
         state.totalAmount += existingItem.price;
+
+        localStorage.setItem(existingItem.id, JSON.stringify(existingItem));
       }
     },
     removeItemFromCart(state, action) {
@@ -37,10 +48,13 @@ const cartSlice = createSlice({
 
       if (existingItem.quantity === 1) {
         state.items = state.items.filter(item => item.id !== id);
+        localStorage.removeItem(existingItem.id);
       } else {
         existingItem.quantity--;
         existingItem.totalPrice -= existingItem.price;
         state.totalAmount -= existingItem.price;
+
+        localStorage.setItem(existingItem.id, JSON.stringify(existingItem));
       }
     },
   },

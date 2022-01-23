@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { uiActions } from './store/ui-slice';
+import { Spinner } from './components/UI/Spinner';
 import Header from './components/Header';
 import MainContainer from './components/MainContainer';
 import ItemsContainer from './components/ItemsContainer';
-import { Spinner } from './components/UI/Spinner';
 import Cart from './components/Cart/Cart';
 import Modal from './components/UI/Modal';
 
