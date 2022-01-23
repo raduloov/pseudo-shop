@@ -10,12 +10,21 @@ const cartSlice = createSlice({
   reducers: {
     fillCartFromLocalStorage(state, action) {
       const items = action.payload;
+      let totalAmount = 0;
+      let totalQuantity = 0;
       items.forEach(item => {
         state.items.push(JSON.parse(localStorage.getItem(item)));
+        totalAmount += JSON.parse(localStorage.getItem(item)).totalPrice;
+        totalQuantity += JSON.parse(localStorage.getItem(item)).quantity;
+        console.log(totalAmount);
       });
+
+      state.totalAmount = totalAmount;
+      state.totalQuantity = totalQuantity;
     },
     addItemToCart(state, action) {
       const newItem = action.payload;
+      console.log(newItem);
       const existingItem = state.items.find(item => item.id === newItem.id);
       state.totalQuantity++;
       state.totalAmount += newItem.price;
@@ -35,7 +44,7 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity++;
         existingItem.totalPrice += newItem.price;
-        state.totalAmount += existingItem.price;
+        console.log(existingItem.price);
 
         localStorage.setItem(existingItem.id, JSON.stringify(existingItem));
       }
@@ -44,10 +53,10 @@ const cartSlice = createSlice({
       const id = action.payload;
       const existingItem = state.items.find(item => item.id === id);
       state.totalQuantity--;
-      state.totalAmount -= existingItem.price;
 
       if (existingItem.quantity === 1) {
         state.items = state.items.filter(item => item.id !== id);
+        state.totalAmount -= existingItem.price;
         localStorage.removeItem(existingItem.id);
       } else {
         existingItem.quantity--;

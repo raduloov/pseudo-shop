@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { uiActions } from './store/ui-slice';
+import { cartActions } from './store/cart-slice';
 import { Spinner } from './components/UI/Spinner';
 import Header from './components/Header';
 import MainContainer from './components/MainContainer';
@@ -62,6 +63,12 @@ function App() {
   useEffect(() => {
     setData();
   }, [setData]);
+
+  useEffect(() => {
+    const items = Object.keys(localStorage);
+    dispatch(cartActions.fillCartFromLocalStorage(items));
+    console.log(items);
+  }, [dispatch]);
 
   const chooseCategoryHandler = category => {
     if (category === '') {

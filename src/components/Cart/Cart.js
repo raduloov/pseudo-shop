@@ -1,21 +1,13 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ShoppingCartIcon } from '@heroicons/react/outline';
 import CartItem from './CartItem';
-import { cartActions } from '../../store/cart-slice';
 
 const CartContainer = props => {
   const cartItems = useSelector(state => state.cart.items);
   const totalAmount = Math.abs(
     useSelector(state => state.cart.totalAmount).toFixed(2)
   );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const items = Object.keys(localStorage);
-    dispatch(cartActions.fillCartFromLocalStorage(items));
-  }, []);
 
   const orderHandler = async () => {
     const orderItems = cartItems.map(item => {
