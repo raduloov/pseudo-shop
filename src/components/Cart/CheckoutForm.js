@@ -98,8 +98,8 @@ const CheckoutForm = props => {
     >
       <form>
         <h3 className="text-2xl text-center">Please fill out the form</h3>
-        <div className="mt-3 p-2 flex justify-between">
-          <label htmlFor="name" className={` mr-4 text-xl`}>
+        <div className="mt-3 p-2 flex sm:flex-col justify-between">
+          <label htmlFor="name" className="mr-4 text-xl sm:mb-1">
             Your Name
           </label>
           <input
@@ -115,8 +115,8 @@ const CheckoutForm = props => {
             } rounded-md p-1 bg-[rgba(255,255,255,0.8)] text-black text-xl  w-42 mr-2`}
           />
         </div>
-        <div className="p-2 flex justify-between">
-          <label htmlFor="city" className={`mr-4 text-xl`}>
+        <div className="p-2 flex sm:flex-col justify-between">
+          <label htmlFor="city" className="mr-4 text-xl sm:mb-1">
             City
           </label>
           <input
@@ -132,8 +132,8 @@ const CheckoutForm = props => {
             } rounded-md p-1 bg-[rgba(255,255,255,0.8)] text-black text-xl w-42 mr-2`}
           />
         </div>
-        <div className="p-2 flex justify-between">
-          <label htmlFor="street" className={`mr-4 text-xl`}>
+        <div className="p-2 flex sm:flex-col justify-between">
+          <label htmlFor="street" className="mr-4 text-xl sm:mb-1">
             Street
           </label>
           <input

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ShoppingCartIcon } from '@heroicons/react/outline';
@@ -5,15 +6,27 @@ import { uiActions } from '../../store/ui-slice';
 import CartItem from './CartItem';
 
 const CartContainer = props => {
-  const cartItems = useSelector(state => state.cart.items);
+  const items = useSelector(state => state.cart.items);
   const totalAmount = Math.abs(
     useSelector(state => state.cart.totalAmount).toFixed(2)
   );
 
+  const [cartIsValid, setCartIsValid] = useState(false);
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (items.length === 0) {
+      setCartIsValid(false);
+    } else {
+      setCartIsValid(true);
+    }
+  }, [items]);
+
   const checkoutHandler = () => {
-    dispatch(uiActions.toggleCheckout());
+    if (cartIsValid) {
+      dispatch(uiActions.toggleCheckout());
+    }
   };
 
   return (
@@ -35,7 +48,7 @@ const CartContainer = props => {
           <ShoppingCartIcon className="h-10 m-3" />
         </div>
         <div className="flex flex-col overflow-y-auto h-full p-3">
-          {cartItems.map(item => (
+          {items.map(item => (
             <CartItem
               key={item.id}
               item={{
@@ -49,6 +62,11 @@ const CartContainer = props => {
             />
           ))}
         </div>
+        {!cartIsValid && (
+          <p className="text-center text-red-500 text-xl mb-5">
+            Please add at least one item before checking out!
+          </p>
+        )}
         <div className="w-full py-5 bg-neutral-500 shadow-md flex flex-col items-center justify-evenly">
           <p className="pb-5 text-2xl text-white">Total: ${totalAmount}</p>
           <div className="flex justify-evenly w-full">

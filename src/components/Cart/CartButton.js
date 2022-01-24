@@ -28,7 +28,7 @@ const CartButton = props => {
       onClick={props.onClick}
       className={`${
         btnIsHighlighted && 'animate-[bump_0.3s_ease-out]'
-      } flex items-center text-xl rounded-xl bg-[#8a8a8a] p-2 hover:brightness-125`}
+      } flex items-center text-xl rounded-xl bg-[#8a8a8a] md:p-2 hover:brightness-125`}
     >
       <ShoppingCartIcon className="h-6 w-6 m-2" />
       Cart

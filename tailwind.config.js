@@ -30,6 +30,10 @@ module.exports = {
         },
       },
     },
+    screens: {
+      sm: { max: '450px' },
+      md: '1366px',
+    },
   },
   plugins: [],
 };

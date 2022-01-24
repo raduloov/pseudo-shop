@@ -20,22 +20,22 @@ const ItemCard = ({ data }) => {
   };
 
   return (
-    <div className="bg-[rgba(34,34,34,0.80)] text-white w-64 rounded-xl overflow-hidden my-4 mx-2 flex flex-col justify-between shadow-lg">
+    <div className="bg-[rgba(34,34,34,0.80)] text-white sm:w-44 md:w-64 rounded-xl overflow-hidden my-4 mx-2 flex flex-col justify-between shadow-lg">
       <div>
-        <div className="flex justify-center items-center p-5 h-48">
+        <div className="flex justify-center items-center p-5 sm:h-32 md:h-48">
           <img src={data.image} alt="" className="max-w-full max-h-full" />
         </div>
-        <p className="text-xl p-2">{data.title}</p>
+        <p className="md:text-xl p-2">{data.title}</p>
       </div>
       <div>
         <div className="p-2">
           <div className="py-2 flex">
             {[...Array(Math.round(data.rating.rate))].map(star => (
-              <StarIcon className="h-6" key={Math.random().toString(36)} />
+              <StarIcon className="sm:h-5 md:h-6" key={Math.random().toString(36)} />
             ))}
             <p className="px-2">({data.rating.count})</p>
           </div>
-          <p className="text-2xl">${data.price}</p>
+          <p className="sm:text-xl md:text-2xl">${data.price}</p>
         </div>
         <div className="flex items-center justify-center p-2 text-black">
           <Button onClick={addToCartHandler}>

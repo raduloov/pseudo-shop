@@ -22,23 +22,23 @@ const Header = props => {
   };
 
   return (
-    <div className="w-full h-24 flex justify-center shadow-md bg-zinc-800">
-      <div className="h-full w-[1360px] flex items-center justify-between p-2">
+    <div className="w-full md:h-24 flex justify-center shadow-md bg-zinc-800">
+      <div className="h-full sm:w-full md:w-[1360px] flex items-center justify-between p-2">
         <div className="flex">
           <div className="flex">
-            <div>
-              <h1 className="text-[#fff] text-3xl">Pseudo Shop</h1>
-              <h4 className="text-zinc-400">Free shipping worldwide</h4>
-            </div>
             <Logo />
+            <div className="sm:hidden">
+              <h1 className="text-[#fff] md:text-3xl">Pseudo Shop</h1>
+              <h4 className="text-zinc-400 sm:text-sm">Free shipping worldwide</h4>
+            </div>
           </div>
-          <form onSubmit={submitHandler} className="flex items-center ml-20">
+          <form onSubmit={submitHandler} className="flex items-center md:ml-20">
             <input
               onChange={searchHandler}
               type="text"
               value={searchTerm}
               placeholder="Search for a product..."
-              className="rounded-md px-1 py-2 bg-[rgba(255,255,255,0.8)] text-black text-xl hover:bg-[rgba(255,255,255,1)] w-42 mr-2"
+              className="rounded-md px-1 py-2 bg-[rgba(255,255,255,0.8)] text-black md:text-xl hover:bg-[rgba(255,255,255,1)] sm:w-28 md:w-42 sm:mr-1 md:mr-2"
             />
             <Button>
               <SearchIcon className="h-7" />
