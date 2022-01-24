@@ -18,8 +18,6 @@ const CartButton = props => {
       setBtnIsHighlighted(false);
     }, 300);
 
-    console.log('sad');
-
     return () => {
       clearTimeout(timer);
     };

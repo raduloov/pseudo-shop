@@ -1,6 +1,5 @@
 import { SearchIcon } from '@heroicons/react/outline';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import Logo from './UI/Logo';
 import CartButton from './Cart/CartButton';

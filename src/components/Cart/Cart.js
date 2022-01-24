@@ -1,6 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { ShoppingCartIcon } from '@heroicons/react/outline';
+import { uiActions } from '../../store/ui-slice';
 import CartItem from './CartItem';
 
 const CartContainer = props => {
@@ -9,28 +10,10 @@ const CartContainer = props => {
     useSelector(state => state.cart.totalAmount).toFixed(2)
   );
 
-  const orderHandler = async () => {
-    const orderItems = cartItems.map(item => {
-      return {
-        name: item.title,
-        price: item.price,
-        quantity: item.quantity,
-        totalPrice: item.totalPrice,
-      };
-    });
+  const dispatch = useDispatch();
 
-    const response = await fetch(
-      'https://pseudo-shop-firebase-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
-      {
-        method: 'POST',
-        body: JSON.stringify(orderItems),
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-
-    props.onOrder();
+  const checkoutHandler = () => {
+    dispatch(uiActions.toggleCheckout());
   };
 
   return (
@@ -48,7 +31,7 @@ const CartContainer = props => {
         className="w-96 h-screen fixed right-0 z-20 animate-[slide-left_0.5s_ease] flex flex-col justify-between"
       >
         <div className="w-full h-32 bg-neutral-500 text-white text-3xl flex justify-center items-center shadow-md">
-          Your Cart
+          Your Shopping Cart
           <ShoppingCartIcon className="h-10 m-3" />
         </div>
         <div className="flex flex-col overflow-y-auto h-full p-3">
@@ -76,7 +59,7 @@ const CartContainer = props => {
               Cancel
             </button>
             <button
-              onClick={orderHandler}
+              onClick={checkoutHandler}
               className="bg-white rounded-lg p-2 text-2xl text-black w-24 hover:bg-zinc-400 shadow-md active:scale-[0.95]"
             >
               Order

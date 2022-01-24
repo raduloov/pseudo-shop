@@ -9,6 +9,8 @@ import MainContainer from './components/MainContainer';
 import ItemsContainer from './components/ItemsContainer';
 import Cart from './components/Cart/Cart';
 import Modal from './components/UI/Modal';
+import OrderScreen from './components/Cart/OrderScreen';
+import OrderForm from './components/Cart/OrderForm';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -16,7 +18,9 @@ function App() {
   const [error, setError] = useState(null);
 
   const showCart = useSelector(state => state.ui.cartIsVisible);
-  const showOrderScreen = useSelector(state => state.ui.orderScreenIsVisible);
+  const showOrderSuccess = useSelector(state => state.ui.orderSuccessIsVisible);
+  const showCheckout = useSelector(state => state.ui.checkoutIsVisible);
+
   const dispatch = useDispatch();
 
   const getAllProducts = async (url = 'https://fakestoreapi.com/products') => {
@@ -67,7 +71,6 @@ function App() {
   useEffect(() => {
     const items = Object.keys(localStorage);
     dispatch(cartActions.fillCartFromLocalStorage(items));
-    console.log(items);
   }, [dispatch]);
 
   const chooseCategoryHandler = category => {
@@ -99,11 +102,21 @@ function App() {
     dispatch(uiActions.toggleCart());
   };
 
-  const orderScreenHandler = () => {
-    dispatch(uiActions.toggleOrderScreen());
+  const orderSuccessHandler = () => {
+    dispatch(uiActions.toggleOrderSuccess());
 
-    if (showOrderScreen) {
+    if (showOrderSuccess) {
       dispatch(uiActions.toggleCart());
+    }
+  };
+
+  const checkoutHandler = action => {
+    if (action === 'confirm') {
+      dispatch(uiActions.toggleCheckout());
+      dispatch(uiActions.toggleOrderSuccess());
+    }
+    if (action === 'cancel') {
+      dispatch(uiActions.toggleCheckout());
     }
   };
 
@@ -140,8 +153,20 @@ function App() {
 
   return (
     <div>
-      {showOrderScreen && <Modal onClose={orderScreenHandler} />}
-      {showCart && <Cart onClose={toggleCartHandler} onOrder={orderScreenHandler} />}
+      {showOrderSuccess && (
+        <Modal>
+          <OrderScreen onClose={orderSuccessHandler} />
+        </Modal>
+      )}
+      {showCheckout && (
+        <Modal>
+          <OrderForm
+            onClose={() => checkoutHandler('cancel')}
+            onConfirm={() => checkoutHandler('confirm')}
+          />
+        </Modal>
+      )}
+      {showCart && <Cart onClose={toggleCartHandler} />}
       <Header onSearch={searchHandler} onShowCart={toggleCartHandler} />
       <MainContainer onChooseCategory={chooseCategoryHandler}>
         {content}

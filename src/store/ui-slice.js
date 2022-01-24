@@ -4,14 +4,18 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     cartIsVisible: false,
-    orderScreenIsVisible: false,
+    checkoutIsVisible: false,
+    orderSuccessIsVisible: false,
   },
   reducers: {
     toggleCart(state) {
       state.cartIsVisible = !state.cartIsVisible;
     },
-    toggleOrderScreen(state) {
-      state.orderScreenIsVisible = !state.orderScreenIsVisible;
+    toggleOrderSuccess(state) {
+      state.orderSuccessIsVisible = !state.orderSuccessIsVisible;
+    },
+    toggleCheckout(state) {
+      state.checkoutIsVisible = !state.checkoutIsVisible;
     },
   },
 });
