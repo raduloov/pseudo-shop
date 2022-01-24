@@ -1,4 +1,4 @@
-const OrderScreen = props => {
+const OrderSuccess = props => {
   return (
     <div
       style={{
@@ -22,4 +22,4 @@ const OrderScreen = props => {
   );
 };
 
-export default OrderScreen;
+export default OrderSuccess;

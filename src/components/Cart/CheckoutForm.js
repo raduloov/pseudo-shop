@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { cartActions } from '../../store/cart-slice';
 
 const isEmpty = value => value.trim() === '';
 
-const OrderForm = props => {
+const CheckoutForm = props => {
   const [formInputValidity, setFormInputValidity] = useState({
     name: true,
     city: true,
@@ -17,6 +19,7 @@ const OrderForm = props => {
   const totalAmount = Math.abs(
     useSelector(state => state.cart.totalAmount).toFixed(2)
   );
+  const dispatch = useDispatch();
 
   const checkValidity = useCallback(() => {
     const enteredNameIsValid = !isEmpty(enteredName);
@@ -45,7 +48,16 @@ const OrderForm = props => {
       };
     });
 
-    const order = JSON.stringify({ ...orderItems, totalAmount });
+    const userDetails = {
+      name: enteredName,
+      city: enteredCity,
+      street: enteredStreet,
+    };
+
+    const order = JSON.stringify({
+      order: { ...orderItems, total: totalAmount },
+      'user-details': userDetails,
+    });
 
     const response = await fetch(
       'https://pseudo-shop-firebase-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
@@ -56,7 +68,6 @@ const OrderForm = props => {
       }
     );
     const data = await response.json();
-    console.log(data);
 
     props.onConfirm();
   };
@@ -72,6 +83,8 @@ const OrderForm = props => {
     if (!formIsValid) return;
 
     orderHandler();
+
+    dispatch(cartActions.emptyCart());
   };
 
   return (
@@ -158,4 +171,4 @@ const OrderForm = props => {
   );
 };
 
-export default OrderForm;
+export default CheckoutForm;

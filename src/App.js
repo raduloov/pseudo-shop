@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { uiActions } from './store/ui-slice';
 import { cartActions } from './store/cart-slice';
-import { Spinner } from './components/UI/Spinner';
+import Spinner from './components/UI/Spinner';
 import Header from './components/Header';
 import MainContainer from './components/MainContainer';
 import ItemsContainer from './components/ItemsContainer';
 import Cart from './components/Cart/Cart';
 import Modal from './components/UI/Modal';
-import OrderScreen from './components/Cart/OrderScreen';
-import OrderForm from './components/Cart/OrderForm';
+import CheckoutForm from './components/Cart/CheckoutForm';
+import OrderSuccess from './components/Cart/OrderSuccess';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -155,12 +155,12 @@ function App() {
     <div>
       {showOrderSuccess && (
         <Modal>
-          <OrderScreen onClose={orderSuccessHandler} />
+          <OrderSuccess onClose={orderSuccessHandler} />
         </Modal>
       )}
       {showCheckout && (
         <Modal>
-          <OrderForm
+          <CheckoutForm
             onClose={() => checkoutHandler('cancel')}
             onConfirm={() => checkoutHandler('confirm')}
           />

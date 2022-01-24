@@ -16,7 +16,6 @@ const cartSlice = createSlice({
         state.items.push(JSON.parse(localStorage.getItem(item)));
         totalAmount += JSON.parse(localStorage.getItem(item)).totalPrice;
         totalQuantity += JSON.parse(localStorage.getItem(item)).quantity;
-        console.log(totalAmount);
       });
 
       state.totalAmount = totalAmount;
@@ -44,7 +43,6 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity++;
         existingItem.totalPrice += newItem.price;
-        console.log(existingItem.price);
 
         localStorage.setItem(existingItem.id, JSON.stringify(existingItem));
       }
@@ -65,6 +63,12 @@ const cartSlice = createSlice({
 
         localStorage.setItem(existingItem.id, JSON.stringify(existingItem));
       }
+    },
+    emptyCart(state) {
+      state.items = [];
+      state.totalQuantity = 0;
+      state.totalAmount = 0;
+      localStorage.clear();
     },
   },
 });
