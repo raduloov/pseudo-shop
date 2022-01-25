@@ -1,6 +1,12 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import {
+  CurrencyDollarIcon,
+  DotsHorizontalIcon,
+  ArrowNarrowUpIcon,
+  ArrowNarrowDownIcon,
+} from '@heroicons/react/outline';
 
 const SortDropdown = props => {
   return (
@@ -32,8 +38,12 @@ const SortDropdown = props => {
                     onClick={() => props.sortBy('price-asc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-between rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
+                    <div className="flex">
+                      <CurrencyDollarIcon className="h-5" />
+                      <ArrowNarrowUpIcon className="h-5" />
+                    </div>
                     Price (Ascending)
                   </button>
                 )}
@@ -44,8 +54,12 @@ const SortDropdown = props => {
                     onClick={() => props.sortBy('price-desc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-between rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
+                    <div className="flex">
+                      <CurrencyDollarIcon className="h-5" />
+                      <ArrowNarrowDownIcon className="h-5" />
+                    </div>
                     Price (Descending)
                   </button>
                 )}
@@ -56,8 +70,12 @@ const SortDropdown = props => {
                     onClick={() => props.sortBy('name-asc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-between rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
+                    <div className="flex">
+                      <DotsHorizontalIcon className="h-5" />
+                      <ArrowNarrowUpIcon className="h-5" />
+                    </div>
                     Name (Ascending)
                   </button>
                 )}
@@ -68,8 +86,12 @@ const SortDropdown = props => {
                     onClick={() => props.sortBy('name-desc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-between rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
+                    <div className="flex">
+                      <DotsHorizontalIcon className="h-5" />
+                      <ArrowNarrowDownIcon className="h-5" />
+                    </div>
                     Name (Descending)
                   </button>
                 )}
