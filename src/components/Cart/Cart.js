@@ -33,7 +33,7 @@ const CartContainer = props => {
     <>
       <div
         onClick={props.onClose}
-        className="bg-[rgba(0,0,0,0.8)] w-screen h-screen fixed backdrop-blur-sm z-10 shadow-md animate-[blur-in_0.5s_ease]"
+        className="bg-[rgba(0,0,0,0.8)] w-screen h-screen fixed backdrop-blur-sm z-20 shadow-md animate-[blur-in_0.5s_ease]"
       ></div>
       <div
         style={{

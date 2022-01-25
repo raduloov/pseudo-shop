@@ -5,7 +5,7 @@ import Logo from './UI/Logo';
 import CartButton from './Cart/CartButton';
 import Button from './UI/Button';
 
-const Header = props => {
+const Navbar = props => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const searchHandler = e => {
@@ -22,7 +22,7 @@ const Header = props => {
   };
 
   return (
-    <div className="w-full md:h-24 flex justify-center shadow-md bg-zinc-800">
+    <div className="w-full md:h-24 flex justify-center shadow-md bg-[rgba(39,39,42,1)] fixed z-10">
       <div className="h-full sm:w-full md:w-[1360px] flex items-center justify-between p-2">
         <div className="flex">
           <div className="flex">
@@ -51,4 +51,4 @@ const Header = props => {
   );
 };
 
-export default Header;
+export default Navbar;

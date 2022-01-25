@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { uiActions } from './store/ui-slice';
 import { cartActions } from './store/cart-slice';
 import Spinner from './components/UI/Spinner';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import MainContainer from './components/MainContainer';
 import ItemsContainer from './components/ItemsContainer';
 import Cart from './components/Cart/Cart';
@@ -167,7 +167,7 @@ function App() {
         </Modal>
       )}
       {showCart && <Cart onClose={toggleCartHandler} />}
-      <Header onSearch={searchHandler} onShowCart={toggleCartHandler} />
+      <Navbar onSearch={searchHandler} onShowCart={toggleCartHandler} />
       <MainContainer onChooseCategory={chooseCategoryHandler}>
         {content}
       </MainContainer>
