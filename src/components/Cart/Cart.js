@@ -41,7 +41,7 @@ const CartContainer = props => {
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234a4a4a' fill-opacity='0.37' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E\")",
         }}
-        className="w-96 h-screen fixed right-0 z-20 animate-[slide-left_0.5s_ease] flex flex-col justify-between"
+        className="sm:w-[90vw] md:w-96 h-screen fixed right-0 z-20 animate-[slide-left_0.5s_ease] flex flex-col justify-between"
       >
         <div className="w-full h-32 bg-neutral-500 text-white text-3xl flex justify-center items-center shadow-md">
           Your Shopping Cart
