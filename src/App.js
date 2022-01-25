@@ -81,6 +81,28 @@ function App() {
     }
   };
 
+  const sortHandler = method => {
+    const currentItems = [...items];
+    let sortedItems = [];
+
+    switch (method) {
+      case 'price-asc':
+        sortedItems = currentItems.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        sortedItems = currentItems.sort((a, b) => b.price - a.price);
+        break;
+      case 'name-asc':
+        sortedItems = currentItems.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'name-desc':
+        sortedItems = currentItems.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+    }
+
+    setItems(sortedItems);
+  };
+
   const searchHandler = async searchTerm => {
     setIsLoading(true);
 
@@ -130,12 +152,13 @@ function App() {
 
   if (items.length > 0) {
     content = <ItemsContainer items={items} />;
+    console.log(items);
   }
 
   if (items.length === 0) {
     content = (
       <div className="flex justify-center h-[50vh]">
-        <p className="mt-32 text-white text-2xl">
+        <p className="p-10 mt-32 text-white text-center text-2xl">
           No items match your search criteria :(
         </p>
       </div>
@@ -168,7 +191,7 @@ function App() {
       )}
       {showCart && <Cart onClose={toggleCartHandler} />}
       <Navbar onSearch={searchHandler} onShowCart={toggleCartHandler} />
-      <MainContainer onChooseCategory={chooseCategoryHandler}>
+      <MainContainer onChooseCategory={chooseCategoryHandler} onSort={sortHandler}>
         {content}
       </MainContainer>
     </div>

@@ -2,13 +2,13 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 
-const Dropdown = props => {
+const SortDropdown = props => {
   return (
     <div className="w-56 text-right relative">
-      <Menu as="div" className="absolute inline-block text-left left-10">
+      <Menu as="div" className="absolute inline-block text-left right-10">
         <div>
           <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-40 hover:bg-opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            Categories
+            Sort by
             <ChevronDownIcon
               className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
               aria-hidden="true"
@@ -24,65 +24,53 @@ const Dropdown = props => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute left-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="p-1">
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => props.chooseCategory('')}
+                    onClick={() => props.sortBy('price-asc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    All Products
+                    Price (Ascending)
                   </button>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => props.chooseCategory('jewelery')}
+                    onClick={() => props.sortBy('price-desc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    Jewery
+                    Price (Descending)
                   </button>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => props.chooseCategory('electronics')}
+                    onClick={() => props.sortBy('name-asc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    Electronics
+                    Name (Ascending)
                   </button>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => props.chooseCategory("men's clothing")}
+                    onClick={() => props.sortBy('name-desc')}
                     className={`${
                       active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    } group flex justify-end rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    Men's Clothing
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    onClick={() => props.chooseCategory("women's clothing")}
-                    className={`${
-                      active ? 'bg-black bg-opacity-70 text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                  >
-                    Women's Clothing
+                    Name (Descending)
                   </button>
                 )}
               </Menu.Item>
@@ -94,4 +82,4 @@ const Dropdown = props => {
   );
 };
 
-export default Dropdown;
+export default SortDropdown;
