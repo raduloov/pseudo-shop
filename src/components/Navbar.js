@@ -25,7 +25,15 @@ const Navbar = props => {
     <div className="w-full md:h-24 flex justify-center shadow-md bg-[rgba(39,39,42,1)] fixed z-10">
       <div className="h-full sm:w-full md:w-[1360px] flex items-center justify-between p-2">
         <div className="flex">
-          <div className="flex">
+          <div
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              });
+            }}
+            className="flex"
+          >
             <Logo />
             <div className="sm:hidden">
               <h1 className="text-[#fff] md:text-3xl">Pseudo Shop</h1>

@@ -152,7 +152,6 @@ function App() {
 
   if (items.length > 0) {
     content = <ItemsContainer items={items} />;
-    console.log(items);
   }
 
   if (items.length === 0) {
