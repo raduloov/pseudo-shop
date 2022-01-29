@@ -23,46 +23,51 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const getAllProducts = async (url = 'https://fakestoreapi.com/products') => {
-    setError(null);
+  const getAllProducts = useCallback(
+    async (url = 'https://fakestoreapi.com/products') => {
+      setError(null);
 
-    try {
-      const res = await fetch(url);
+      try {
+        const res = await fetch(url);
 
-      if (!res.ok) {
+        if (!res.ok) {
+          throw new Error('Could not get products. :(');
+        }
+
+        const data = await res.json();
+        return data;
+      } catch (error) {
         setError(error.message);
-        throw new Error('Could not get products. :(');
       }
+    },
+    []
+  );
 
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+  const setData = useCallback(
+    async url => {
+      setIsLoading(true);
 
-  const setData = useCallback(async url => {
-    setIsLoading(true);
+      const data = await getAllProducts(url);
 
-    const data = await getAllProducts(url);
+      const loadedItems = [];
 
-    const loadedItems = [];
-
-    data.forEach(item => {
-      loadedItems.push({
-        title: item.title,
-        image: item.image,
-        price: item.price,
-        rating: item.rating,
-        category: item.category,
-        descriprion: item.descriprion,
-        id: item.id,
+      data.forEach(item => {
+        loadedItems.push({
+          title: item.title,
+          image: item.image,
+          price: item.price,
+          rating: item.rating,
+          category: item.category,
+          descriprion: item.descriprion,
+          id: item.id,
+        });
       });
-    });
 
-    setItems(loadedItems);
-    setIsLoading(false);
-  }, []);
+      setItems(loadedItems);
+      setIsLoading(false);
+    },
+    [getAllProducts]
+  );
 
   useEffect(() => {
     setData();
@@ -97,6 +102,9 @@ function App() {
         break;
       case 'name-desc':
         sortedItems = currentItems.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      default:
+        sortedItems = [];
         break;
     }
 

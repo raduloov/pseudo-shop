@@ -59,7 +59,7 @@ const CheckoutForm = props => {
       'user-details': userDetails,
     });
 
-    const response = await fetch(
+    await fetch(
       'https://pseudo-shop-firebase-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
       {
         method: 'POST',
@@ -67,7 +67,6 @@ const CheckoutForm = props => {
         headers: { 'Content-Type': 'application/json' },
       }
     );
-    const data = await response.json();
 
     props.onConfirm();
   };

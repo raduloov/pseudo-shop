@@ -20,7 +20,7 @@ const ItemCard = ({ data }) => {
   };
 
   return (
-    <div className="bg-[rgba(34,34,34,0.80)] text-white sm:w-44 w-64 rounded-xl overflow-hidden my-4 mx-2 flex flex-col justify-between shadow-lg hover:scale-[1.035] hover:shadow-xl transition-all">
+    <div className="bg-[rgba(34,34,34,0.80)] text-white sm:w-44 w-64 rounded-xl overflow-hidden my-4 mx-2 flex flex-col justify-between shadow-lg hover:scale-[1.035] hover:shadow-xl hover:cursor-pointer transition-all">
       <div>
         <div className="flex justify-center items-center p-5 sm:h-32 md:h-48">
           <img src={data.image} alt="" className="max-w-full max-h-full" />
