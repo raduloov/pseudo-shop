@@ -113,17 +113,16 @@ function App() {
 
   const searchHandler = async searchTerm => {
     setIsLoading(true);
-
     const data = await getAllProducts();
-
     const filteredItems = data.filter(item => {
       if (searchTerm === '') {
         return item;
       } else if (item.title.toLowerCase().includes(searchTerm.toLowerCase())) {
         return item;
       }
-    });
 
+      return item;
+    });
     setIsLoading(false);
     setItems(filteredItems);
   };
